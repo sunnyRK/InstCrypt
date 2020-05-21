@@ -1,0 +1,39 @@
+{
+    "name": "awesome-maker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "dependencies": {
+        "@uniswap/sdk": "^2.0.3",
+        "axios": "^0.19.2",
+        "bignumber.js": "^9.0.0",
+        "bootstrap": "^4.5.0",
+        "css-loader": "^3.5.3",
+        "next": "^9.1.5",
+        "next-routes": "^1.4.2",
+        "openzeppelin-solidity": "^2.4.0",
+        "react": "^16.8.6",
+        "react-bootstrap": "^1.0.1",
+        "react-dom": "^16.8.6",
+        "react-scripts": "3.0.0",
+        "react-toastify": "^6.0.2",
+        "semantic-ui-react": "^0.88.2",
+        "solc": "^0.5.12",
+        "truffle-hdwallet-provider": "0.0.3",
+        "web3": "^1.2.4",
+        "web3-utils": "^1.2.4"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sunnyRK/awesome-maker.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sunnyRK/awesome-maker/issues"
+    },
+    "homepage": "https://github.com/sunnyRK/awesome-maker#readme"
+}
