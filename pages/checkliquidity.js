@@ -5,6 +5,7 @@ import {
   getERCContractInstance,
   getUniswapV2Pair,
   PairInfoArray,
+  getUniswapV2Factory,
   getERCContractInstanceWithoutSymbol
 
 } from '../config/instances/contractinstances';
@@ -27,7 +28,6 @@ class CheckLiquidity extends Component {
         const UniV2PairAddress = this.state.checkPairAddress;
         const pairInstance = await getUniswapV2Pair(web3, PairInfoArray[0][this.state.checkPairAddress].pairaddress);
 
-
         const erc20ContractInstance1 = await getERCContractInstance(web3, UniV2PairAddress);
 
         const reserves = await pairInstance.methods.getReserves().call();
@@ -40,6 +40,7 @@ class CheckLiquidity extends Component {
         
         const symbol0 = await token0Instance.methods.symbol().call();
         const symbol1 = await token1Instance.methods.symbol().call();
+
         const poolTokenBalance = await erc20ContractInstance1.methods.balanceOf(accounts[0]).call();
         this.setState({ 
             checkPairBalance: poolTokenBalance, 
@@ -61,7 +62,7 @@ class CheckLiquidity extends Component {
 
             const token0 = await pairInstance.methods.token0().call();
             const token1 = await pairInstance.methods.token1().call();
-    
+
             const token0Instance = await getERCContractInstanceWithoutSymbol(web3, token0);
             const token1Instance = await getERCContractInstanceWithoutSymbol(web3, token1);
             

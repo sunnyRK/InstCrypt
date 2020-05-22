@@ -84,13 +84,41 @@ export const TokenInfoArray = [
             "token_symbol":"ZIL",
             "token_contract_address":"0xaD78AFbbE48bA7B670fbC54c65708cbc17450167",
             "decimals": 18
-        },'WETH-DAI': {
+        },'cUSDT': {
+            "token_symbol":"cUSDT",
+            "token_contract_address":"0x2fb298bdbef468638ad6653ff8376575ea41e768",
+            "decimals": 18
+        }, 'WETH-DAI': {
             "token_symbol":"pair",
             "token_contract_address":"0x860E22614fd0E0F30a23C584386476FEA6844Dab",
             "decimals": 18
         },'DAI-KNC': {
             "token_symbol":"pair",
             "token_contract_address":"0x2084b246D7455E973F646Eac00D655541F50aD61",
+            "decimals": 18
+        },'DAI-cUSDT': {
+            "token_symbol":"pair",
+            "token_contract_address":"0xC1c88DA16Cae5e0A61E665fD63129dC2b64C2E2E",
+            "decimals": 18
+        },'DAI-ZIL': {
+            "token_symbol":"pair",
+            "token_contract_address":"0x80ba6fad89faB001CF7e369179a5F418A8d5aA7f",
+            "decimals": 18
+        },'WETH-cUSDT': {
+            "token_symbol":"pair",
+            "token_contract_address":"0x4763487b0d43747F9715eCeE5e85861d61DC338c",
+            "decimals": 18
+        },'WETH-KNC': {
+            "token_symbol":"pair",
+            "token_contract_address":"0x38c21BDae168084f5084e6182aDBF490Cda0AC9B",
+            "decimals": 18
+        },'WETH-ZIL': {
+            "token_symbol":"pair",
+            "token_contract_address":"0xD2F7783327fF6C60983D6000362BAFecea509504",
+            "decimals": 18
+        },'ZIL-KNC': {
+            "token_symbol":"pair",
+            "token_contract_address":"0x5f3d2e5F7748d261e1e039879c2B47A433fDDf35",
             "decimals": 18
         }
     }
@@ -106,21 +134,29 @@ export const TokenInfoArray = [
             "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
             "token0":"DAI",
             "token1": "KNC"
-        },'DAI-KNC': {
-            "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
+        },'DAI-cUSDT': {
+            "pairaddress":"0xC1c88DA16Cae5e0A61E665fD63129dC2b64C2E2E",
             "token0":"DAI",
+            "token1": "cUSDT"
+        },'DAI-ZIL': {
+            "pairaddress":"0x80ba6fad89faB001CF7e369179a5F418A8d5aA7f",
+            "token0":"DAI",
+            "token1": "ZIL"
+        },'WETH-cUSDT': {
+            "pairaddress":"0x4763487b0d43747F9715eCeE5e85861d61DC338c",
+            "token0":"WETH",
+            "token1": "cUSDT"
+        },'WETH-KNC': {
+            "pairaddress":"0x38c21BDae168084f5084e6182aDBF490Cda0AC9B",
+            "token0":"WETH",
             "token1": "KNC"
-        },'DAI-KNC': {
-            "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
-            "token0":"DAI",
-            "token1": "KNC"
-        },'DAI-KNC': {
-            "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
-            "token0":"DAI",
-            "token1": "KNC"
-        },'DAI-KNC': {
-            "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
-            "token0":"DAI",
+        },'WETH-ZIL': {
+            "pairaddress":"0xD2F7783327fF6C60983D6000362BAFecea509504",
+            "token0":"WETH",
+            "token1": "ZIL"
+        },'ZIL-KNC': {
+            "pairaddress":"0x5f3d2e5F7748d261e1e039879c2B47A433fDDf35",
+            "token0":"ZIL",
             "token1": "KNC"
         }
     }
