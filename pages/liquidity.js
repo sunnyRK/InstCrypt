@@ -6,7 +6,8 @@ import {
   getERCContractInstance,
   TokenInfoArray,
   PairInfoArray,
-  getUniswapV2Factory
+  getUniswapV2Factory, 
+  tagOptions
 } from '../config/instances/contractinstances';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -205,21 +206,6 @@ class Liquidity extends Component {
 
 
     render() {
-        const tagOptions = [
-            {
-              key: 'WETH-DAI',
-              text: 'WETH-DAI',
-              value: 'WETH-DAI',
-              label: { color: 'red', empty: true, circular: true },
-            },
-            {
-              key: 'DAI-KNC',
-              text: 'DAI-KNC',
-              value: 'DAI-KNC',
-              label: { color: 'blue', empty: true, circular: true },
-            }
-        ];
-
         return(
             <Grid.Column>
                                 <Divider></Divider>

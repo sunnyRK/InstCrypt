@@ -9,7 +9,8 @@ import {
     getOraclePriceInstance,
     getERCContractInstance,
     TokenInfoArray,
-    PairInfoArray
+    PairInfoArray,
+    tagOptions
 } from '../config/instances/contractinstances';
 import { ToastContainer, toast } from 'react-toastify';
 import CheckLiquidity from './checkliquidity';
@@ -243,20 +244,6 @@ class Trade extends Component {
         }
     }
     render() {
-        const tagOptions = [
-            {
-              key: 'WETH-DAI',
-              text: 'WETH-DAI',
-              value: 'WETH-DAI',
-              label: { color: 'red', empty: true, circular: true },
-            },
-            {
-              key: 'DAI-KNC',
-              text: 'DAI-KNC',
-              value: 'DAI-KNC',
-              label: { color: 'blue', empty: true, circular: true },
-            }
-          ];
         return(
             <Tab.Pane attached={false}>
                 <Segment style={{backgroundColor:"#f5f5f5"}} color="black">

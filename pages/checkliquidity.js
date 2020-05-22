@@ -6,7 +6,8 @@ import {
   getUniswapV2Pair,
   PairInfoArray,
   getUniswapV2Factory,
-  getERCContractInstanceWithoutSymbol
+  getERCContractInstanceWithoutSymbol,
+  tagOptions
 
 } from '../config/instances/contractinstances';
 import { ToastContainer, toast } from 'react-toastify';
@@ -93,21 +94,6 @@ class CheckLiquidity extends Component {
     };
 
     render() {
-        const tagOptions = [
-            {
-              key: 'WETH-DAI',
-              text: 'WETH-DAI',
-              value: 'WETH-DAI',
-              label: { color: 'red', empty: true, circular: true },
-            },
-            {
-              key: 'DAI-KNC',
-              text: 'DAI-KNC',
-              value: 'DAI-KNC',
-              label: { color: 'blue', empty: true, circular: true },
-            }
-        ];
-
         return(
             <Grid divided stackable>
                 <Grid.Row columns={2} verticalalign='middle' textAlign="center">

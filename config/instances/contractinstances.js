@@ -161,4 +161,55 @@ export const TokenInfoArray = [
         }
     }
   ];
+
+  export const tagOptions = [
+    {
+      key: 'WETH-DAI',
+      text: 'WETH-DAI',
+      value: 'WETH-DAI',
+      label: { color: 'red', empty: true, circular: true },
+    },
+    {
+      key: 'DAI-KNC',
+      text: 'DAI-KNC',
+      value: 'DAI-KNC',
+      label: { color: 'blue', empty: true, circular: true },
+    },
+    {
+      key: 'DAI-cUSDT',
+      text: 'DAI-cUSDT',
+      value: 'DAI-cUSDT',
+      label: { color: 'yellow', empty: true, circular: true },
+    },
+    {
+      key: 'DAI-ZIL',
+      text: 'DAI-ZIL',
+      value: 'DAI-ZIL',
+      label: { color: 'pink', empty: true, circular: true },
+    },
+    {
+      key: 'WETH-cUSDT',
+      text: 'WETH-cUSDT',
+      value: 'WETH-cUSDT',
+      label: { color: 'green', empty: true, circular: true },
+    },
+    {
+        key: 'WETH-KNC',
+        text: 'WETH-KNC',
+        value: 'WETH-KNC',
+        label: { color: 'purple', empty: true, circular: true },
+    },
+    {
+        key: 'WETH-ZIL',
+        text: 'WETH-ZIL',
+        value: 'WETH-ZIL',
+        label: { color: 'grey', empty: true, circular: true },
+    },
+    {
+        key: 'ZIL-KNC',
+        text: 'ZIL-KNC',
+        value: 'ZIL-KNC',
+        label: { color: 'black', empty: true, circular: true },
+    }
+  ];
   
