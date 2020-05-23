@@ -9,7 +9,7 @@ class Transaction extends Component {
     }
 
     async componentDidMount(){  
-        Axios.get('http://localhost:4000/api/getAllProgram')
+        Axios.get('https://instcrypt-node-api.herokuapp.com/api/getAllProgram')
         .then(res => {
             if(res.statusText == "OK") {
   

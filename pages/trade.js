@@ -210,7 +210,7 @@ class Trade extends Component {
                                     "amountOut": this.state.amountOut
                                 }
 
-                                Axios.post('http://localhost:4000/api/createProgram', models)
+                                Axios.post('https://instcrypt-node-api.herokuapp.com/api/createProgram', models)
                                     .then(res => {
                                         if(res.statusText == "OK") {
                                             alert("success");
