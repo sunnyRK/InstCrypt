@@ -24,7 +24,10 @@
         "web3-utils": "^1.2.4"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "next build",
+        "start": "node server.js",
+        "heroku-postbuild": "next build",
+        "dev": "next build && node server.js"
     },
     "repository": {
         "type": "git",
