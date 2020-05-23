@@ -8,8 +8,9 @@ const routes = require("./routes");
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
-    createServer(handler).listen(1923,(err) => {
+    createServer(handler).listen(process.env.PORT || 1923,(err) => {
         if(err) throw err;
-        console.log("Ready on localhost:1923");
+        console.log(`Ready on localhost ${process.env.PORT}`);
+        // `Ready on localhost ${process.env.PORT}`
     });
 });
