@@ -10,16 +10,21 @@ export default props => {
             <Head>
                 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/semantic.min.css"></link>
                 <link rel="stylesheet" href="/static/styles.css"></link>
+                {/* <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> */}
+                {/* <style>
+                    @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+                </style>
+                <link rel="stylesheet" href="/static/style.css"></link> */}
             </Head>
             <Headers/>
             {props.children}
-            <Segment inverted vertical style={{ padding: '4em 4em', marginTop: "30px" }}>
-                    <Container>
+            <Segment inverted vertical style={{ padding: '4em 4em', marginTop: "30px", backgroundColor:"#E03997" }}>
+                    <Container> 
                     <Grid divided inverted stackable>
-                        <Grid.Row>
+                        <Grid.Row >
                         <Grid.Column width={4}>
-                            <Header inverted as='h4' content='About' />
-                            <List link inverted>
+                            <Header inverted as='h4' content='About'/>
+                            <List link inverted >
                             <List.Item as='a'><a href="https://www.linkedin.com/in/sunnyradadiya/" target="_blank">LinkedIn</a></List.Item>
                             </List>
                         </Grid.Column>

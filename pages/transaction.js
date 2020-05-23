@@ -63,7 +63,7 @@ class Transaction extends Component {
     render() {
         return(
             <Grid.Column width={10}>
-                <Segment color="teal">
+                <Segment color="teal" textAlign="center">
                     <Message color="teal">
                         <Message.Header>Transaction History within InstCrypt</Message.Header>
                     </Message> 

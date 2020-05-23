@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Input, Segment, Grid, Dropdown, Message, Icon, Divider } from 'semantic-ui-react';
+import { Button, Form, Input, Segment, Grid, Dropdown, Message, Icon, Divider, Label } from 'semantic-ui-react';
 import web3 from '../config/web3';
 import {
   getUniswapV2Router,
@@ -208,12 +208,14 @@ class Liquidity extends Component {
     render() {
         return(
             <Grid.Column>
-                                <Divider></Divider>
-
-                <Segment color="green">
+                <Label as="a" tag color="green">
+                    For Liquidity Providers
+                </Label>
+                <Segment color="green" textAlign="center">
+                
                 <Form onSubmit={this.addLiquidity}>
                     <Form.Field>
-                        <Message style={{margin:'10px'}} color="green">
+                        <Message color="green">
                             <Message.Header>Add Liquidity</Message.Header>
                             Add Liquidity in any pair 
                         </Message>
@@ -229,8 +231,9 @@ class Liquidity extends Component {
                     </Form.Field>
                     <Form.Field>
                         <Input
-                            placeholder="token0 value in Wei"
                             type = "input"
+                            labelPosition="right"
+                            label="token0 value in WEI"
                             value={this.state.addLiquidityamount0}
                             onChange={event => 
                                 this.setState({
@@ -241,7 +244,8 @@ class Liquidity extends Component {
                     <Form.Field>
                         <Input
                             type = "input"
-                            placeholder="token1 value in Wei"
+                            labelPosition="right"
+                            label="token1 value in WEI"
                             value={this.state.addLiquidityamount1}
                             onChange={event => 
                                 this.setState({
@@ -263,7 +267,7 @@ class Liquidity extends Component {
                 </Form>
                 </Segment>
                 <Divider></Divider>
-                <Segment color="red">
+                <Segment color="red" textAlign="center">
                 <Form onSubmit={this.selectMax}>
                     <Message color="red">
                         <Message.Header>Remove Liquidity</Message.Header>
@@ -290,7 +294,7 @@ class Liquidity extends Component {
                     </Form.Field>
                     <Form.Field>
                         <Button 
-                            color="grey"
+                            color="pink"
                             bsStyle="primary" 
                             basic
                             type="submit"

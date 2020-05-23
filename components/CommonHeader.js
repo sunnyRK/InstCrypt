@@ -8,7 +8,8 @@ import { Button,
     Segment,
     Sidebar,
     Visibility, 
-    Tab
+    Tab,
+    Label
 } from 'semantic-ui-react';
 import { Router } from '../routes';
 
@@ -48,9 +49,8 @@ class DesktopContainer extends Component {
             onBottomPassedReverse={this.hideFixedMenu}
           >
             <Segment
-              inverted
               textAlign='center'
-              style={{ minHeight: 65, padding: '0em 0em', marginBottom: "30px" }}
+              style={{ minHeight: 65, padding: '0em 0em', marginBottom: "30px", backgroundColor:"#E03997" }}
               vertical
             >
               <Menu
@@ -61,11 +61,11 @@ class DesktopContainer extends Component {
                 size='large'
               >
                 <Container>
-                  <Menu inverted pointing secondary size='large'>
+                  <Menu  pointing secondary size='large'>
                   <Menu.Item>
                     
                   <Form onSubmit={this.HomePage}>
-                      <Button style={{ marginLeft: '0em', color: "#000" }}>
+                      <Button style={{ marginLeft: '0em', color: "#E03997" }} color="black">
                         InstCrypt
                       </Button>
                       </Form>
@@ -111,16 +111,15 @@ class DesktopContainer extends Component {
               getWidth={getWidth}
               maxWidth={Responsive.onlyMobile.maxWidth}>
             <Segment
-              inverted
               textAlign='center'
-              style={{ minHeight: 65, padding: '1em 0em', marginBottom: "30px"}}
+              style={{ minHeight: 65, padding: '1em 0em', marginBottom: "30px" , backgroundColor:"#E03997"}}
               vertical
               >
               <Container>
-                <Menu inverted pointing secondary size='large'>
+                <Menu pointing secondary size='large'>
                   <Menu.Item>
                     <Form onSubmit={this.HomePage}>
-                      <Button style={{ marginLeft: '0em', color: "#000" }}>
+                    <Button style={{ marginLeft: '0em', color: "#E03997" }} color="black">
                         InstCrypt
                       </Button>
                       </Form>

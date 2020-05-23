@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Message, Tab, Container, List } from 'semantic-ui-react';
+import {Message, Tab, Container, List, Label, Grid, Segment } from 'semantic-ui-react';
 import Layout from '../components/Layout';
 import { ToastContainer, toast } from 'react-toastify';
 import Trade from "./trade"; 
+import Transaction from "./transaction";
 
 class InstCryp extends Component {
 
@@ -10,18 +11,46 @@ class InstCryp extends Component {
   render() {
     const panes = [
       {
-        menuItem: 'Crypto Trade',
+        menuItem: 'Manage Pools and Automate Trade',
         render: () => 
           <Trade/>,
-      }
+      },
+      {
+        menuItem: 'Transaction History',
+        render: () => 
+          <Tab.Pane attached={false}>
+            <Transaction/>
+          </Tab.Pane>,
+      },
     ]
 
     return (
       <Layout>
         <ToastContainer/>
           <Container>
+            <Segment style={{backgroundColor:"#f8f8f8"}} textAlign="center" >
+              <Grid>
+                <Grid.Row columns={3}>
+                  <Grid.Column>
+                    <Label as="a" tag color="blue">
+                      Automate Trade
+                    </Label>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Label as="a" tag color="green">
+                      Liquidity Providers
+                    </Label>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Label as="a" tag color="pink">
+                      Liquidity Reserves
+                    </Label>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Segment>
             <Tab menu={{secondary: true }} panes={panes}/>
-            <Message>
+            <Message color="pink">
                 <Message.Header>Instructions</Message.Header>
                 <List as="ol">
                     <List.Item as="li" value='*'>

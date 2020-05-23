@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Input, Grid, Dropdown, Message, Tab, Segment, Icon, Label, Divider } from 'semantic-ui-react';
+import { Button, Form, Input, Grid, Dropdown, Message, Tab, Segment, Icon } from 'semantic-ui-react';
 import web3 from '../config/web3';
 import Axios from 'axios';
 import {
@@ -63,7 +63,7 @@ class Trade extends Component {
         const difference = consultPrice - this.state.amountOut;
         const numerator = difference * 100;
         const slippage = numerator/consultPrice; 
-        const slippage2 = slippage + " %";
+        const slippage2 = slippage + " % Slippage rate"
         this.setState({
             slippage: slippage2,
             consultPrice
@@ -112,10 +112,6 @@ class Trade extends Component {
                         pair
                     ).send({
                         from: accounts[0]
-                    });
-                } else {
-                    toast.info("Price can update after 24 hours!", {
-                        position: toast.POSITION.TOP_RIGHT
                     });
                 }
             } else {
@@ -170,6 +166,7 @@ class Trade extends Component {
                         position: toast.POSITION.TOP_RIGHT
                     });
                 } else {
+                    
                     if(this.state.shouldSwap) {
                         // Trade will happen here
                         this.setState({shouldSwap: false});
@@ -190,6 +187,7 @@ class Trade extends Component {
                                 from: accounts[0]
                             });
                         }
+            
                             //check allowance
                             if(parseInt(allowance) >= parseInt(this.state.amountSwapDesired)) {
                                 const routeContractInstance = await getUniswapV2Router(web3);
@@ -318,26 +316,23 @@ class Trade extends Component {
             alert("Please select token among pair.")
         }
     }
-
     render() {
         return(
             <Tab.Pane attached={false}>
-                <Segment style={{backgroundColor:"#fff"}} color="pink">
+                <Segment style={{backgroundColor:"#f5f5f5"}} color="black">
                     <CheckLiquidity/>   
                 </Segment>
-                <Divider></Divider>
-                    <Grid columns={2} divided stackable>
+                    <Grid columns={2} divided stackable textAlign='center'>
                         <Grid.Row>
-                            <Grid.Column>
-                                <Label as="a" tag color="blue">
-                                For Traders
-                                </Label>
-                                <Segment color="blue" textAlign='center'>    
-                                    <Message color="blue">
-                                        <Message.Header>Automate Trade</Message.Header>
-                                    </Message>
+                            <Grid.Column width={6}>
+                                <Segment color="blue">
                                     <Form onSubmit={this.swapExactTokensForTokens}>
-                                        
+                                        <Form.Field>
+                                            <Message color="blue">
+                                                <Message.Header>Crypto Trade</Message.Header>
+                                                    Trade with any crypto pair
+                                            </Message>
+                                        </Form.Field>
                                         <Form.Field>
                                             <Dropdown
                                                 placeholder="Select pair tokens.."
@@ -366,8 +361,7 @@ class Trade extends Component {
                                         <Form.Field>
                                             <Input
                                                 type = "input"
-                                                labelPosition="right"
-                                                label="Amount out"
+                                                placeholder="Amount Out"
                                                 value={this.state.amountOut}
                                                 onChange={event => 
                                                     this.setState({
@@ -378,8 +372,7 @@ class Trade extends Component {
                                         <Form.Field>
                                             <Input
                                                 type = "input"
-                                                labelPosition="right"
-                                                label="Slippage Rate %"
+                                                placeholder="Slippage Rate"
                                                 value={this.state.slippage}
                                                 onChange={event => 
                                                     this.setState({
@@ -402,7 +395,7 @@ class Trade extends Component {
                                     <Form onSubmit={this.updateOracle} style={{marginTop: "10px"}}>
                                         <Form.Field>
                                             <Button 
-                                                color="pink"
+                                                color="black"
                                                 basic
                                                 bsStyle="primary" 
                                                 type="submit"
@@ -414,10 +407,9 @@ class Trade extends Component {
                                         </Form.Field>
                                     </Form>
                                     </Segment>    
+                                <Liquidity/>
                                 </Grid.Column>
-                                <Grid.Column>
-                                    <Liquidity/>
-                                </Grid.Column>
+                                <Transaction/>
                         </Grid.Row>
                     </Grid>
                 </Tab.Pane>

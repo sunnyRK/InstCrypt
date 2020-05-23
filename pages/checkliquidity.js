@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Input, Segment, Grid, Dropdown, Message, Tab, Container, Statistic, Label } from 'semantic-ui-react';
+import { Button, Form, Input, Segment, Grid, Dropdown, Message, Tab, Image, Statistic, Label, Divider } from 'semantic-ui-react';
 import web3 from '../config/web3';
 import {
   getERCContractInstance,
@@ -43,10 +43,19 @@ class CheckLiquidity extends Component {
         const symbol1 = await token1Instance.methods.symbol().call();
 
         const poolTokenBalance = await erc20ContractInstance1.methods.balanceOf(accounts[0]).call();
+        
+        const poolBal = (parseFloat(poolTokenBalance)/1000000000000000000).toFixed(2);
+        const rese0 = (parseFloat(reserves[0])/1000000000000000000).toFixed(2);
+        const rese1 = (parseFloat(reserves[1])/1000000000000000000).toFixed(2);
+
+        const pool0 = poolTokenBalance +"("+ poolBal +")";
+        const res0 = reserves[0] +"("+ rese0 +")";
+        const res1 = reserves[1] +"("+ rese1 +")";
+
         this.setState({ 
-            checkPairBalance: poolTokenBalance, 
-            reserve0: reserves[0],
-            reserve1: reserves[1],
+            checkPairBalance: pool0, 
+            reserve0: res0,
+            reserve1: res1,
             symbol0,
             symbol1
         });
@@ -72,10 +81,19 @@ class CheckLiquidity extends Component {
            
             const erc20ContractInstance1 = await getERCContractInstance(web3, UniV2PairAddress);
             const poolTokenBalance = await erc20ContractInstance1.methods.balanceOf(accounts[0]).call();
+
+            const poolBal = (parseFloat(poolTokenBalance)/1000000000000000000).toFixed(2);
+            const rese0 = (parseFloat(reserves[0])/1000000000000000000).toFixed(2);
+            const rese1 = (parseFloat(reserves[1])/1000000000000000000).toFixed(2);
+
+            const pool0 = poolTokenBalance +"("+ poolBal +")";
+            const res0 = reserves[0] +"("+ rese0 +")";
+            const res1 = reserves[1] +"("+ rese1 +")";
+            
             this.setState({
-                checkPairBalance: poolTokenBalance,
-                reserve0: reserves[0],
-                reserve1: reserves[1],
+                checkPairBalance: pool0,
+                reserve0: res0,
+                reserve1: res1,
                 symbol0,
                 symbol1
             });
@@ -95,15 +113,26 @@ class CheckLiquidity extends Component {
 
     render() {
         return(
-            <Grid divided stackable>
-                <Grid.Row columns={2} verticalalign='middle' textAlign="center">
-                        <Grid.Column>
-                            <Message info>
-                                <Message.Header>Check your pool token liquidity and overall statistic of pair.</Message.Header>
-                            </Message>
-                            <Form onSubmit={this.checkPoolTokenPair}>
+            <div>
+            <Grid stackable>
+                <Grid.Row columns={2}>
+                    <Grid.Column width={4}>
+                        <Image size='tiny' src='/static/images/uniswap.png' style={{marginRight:"10px"}} verticalAlign='middle'/>
+                        <span>
+                            <Statistic size="mini">
+                                <Statistic.Label>LIQUIDITY RESERVES</Statistic.Label>
+                                <Statistic.Value>Uniswap</Statistic.Value>
+                            </Statistic>
+                        </span>
+                    </Grid.Column>
+                    <Grid.Column style={{marginLeft:"200px"}} textAlign="center">
+                        <Message>
+                            <Message.Header>
+                                Check reserves of any pair and respected your pool token to that pair.
+                            </Message.Header>
+                            <Form onSubmit={this.checkPoolTokenPair} style={{margin:"10px"}}>
                                 <Button.Group color='black'>
-                                    <Button basic color='black' loading={this.state.checkbalanceLoading}>
+                                    <Button loading={this.state.checkbalanceLoading} style={{ marginLeft: '0em', color: "#E03997" }} color="black">
                                         Choose pair
                                     </Button>
                                     <Dropdown
@@ -117,28 +146,39 @@ class CheckLiquidity extends Component {
                                     />
                                 </Button.Group>
                             </Form>
+                        </Message>
+                    </Grid.Column>
+                </Grid.Row>
+                <Divider></Divider>
+                <Grid.Row columns={3} divided verticalalign='middle' textAlign="center">
+                        <Grid.Column>
+                            <Segment color="pink" style={{backgroundColor:"black"}}>
+                                <Statistic color="pink" size='mini'>
+                                    <Statistic.Label style={{color:"#E03997"}}><u>{this.state.checkPairAddress}</u> Pool token</Statistic.Label>
+                                    <Statistic.Value>{this.state.checkPairBalance} Uni-V2 wei</Statistic.Value>
+                                </Statistic>
+                            </Segment>
                         </Grid.Column>
                         <Grid.Column>
-                        <Segment color="pink">
+                            <Segment color="white" style={{backgroundColor:"#E03997"}}>
+                                <Statistic size='mini'>
+                                    <Statistic.Label style={{color:"#fff"}}><u>{this.state.symbol0}</u> liquidity</Statistic.Label>
+                                    <Statistic.Value style={{color:"#fff"}}>{this.state.reserve0} wei</Statistic.Value>
+                                </Statistic>
+                            </Segment>
+                        </Grid.Column>
+                        <Grid.Column>
+                        <Segment color="white" style={{backgroundColor:"#E03997"}}>
                             <Statistic color="pink" size='mini'>
-                                <Statistic.Label color="pink"><u>{this.state.checkPairAddress}</u> Pool token</Statistic.Label>
-                                <Statistic.Value>{this.state.checkPairBalance} Uni-V2 wei</Statistic.Value>
-                            </Statistic>
-                        </Segment>
-                        <Segment color="pink">
-                            <Statistic color="pink" size='mini'>
-                                <Statistic.Label><u>{this.state.symbol0}</u> liquidity</Statistic.Label>
-                                <Statistic.Value>{this.state.reserve0} wei</Statistic.Value>
-                            </Statistic>
-                            <Statistic color="pink" size='mini'>
-                                <Statistic.Label><u>{this.state.symbol1}</u> liquidity</Statistic.Label>
-                                <Statistic.Value>{this.state.reserve1} wei</Statistic.Value>
+                                <Statistic.Label style={{color:"#fff"}}><u>{this.state.symbol1}</u> liquidity</Statistic.Label>
+                                <Statistic.Value style={{color:"#fff"}}>{this.state.reserve1} wei</Statistic.Value>
                             </Statistic>
                         </Segment>
                         </Grid.Column>
                     </Grid.Row>
                         
             </Grid>
+            </div>
         );
     }
 
