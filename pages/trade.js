@@ -8,6 +8,7 @@ import {
     getUniswapV2Library, 
     getOraclePriceInstance,
     getERCContractInstance,
+    getUniswapV2Factory,
     TokenInfoArray,
     PairInfoArray,
     tagOptions
@@ -22,6 +23,7 @@ class Trade extends Component {
         tradeLoading: false,
         addLiquidityLoading: false,
         removeLiquidityLoading: false,
+        updateLoading: false,
         amountSwapDesired: '',
         amountOut: '',
         pairTokens: [],
@@ -36,16 +38,34 @@ class Trade extends Component {
     }
 
     async calculateSLippageRate() {
+        const accounts = await web3.eth.getAccounts();
         const oracleInstance = await getOraclePriceInstance(web3);
         // it gives tokenAddress value respect to consultAmountIn value
-        const tokenAddress = TokenInfoArray[0][this.state.token1].token_contract_address;
-        const consultPrice = await oracleInstance.methods.consult(tokenAddress, this.state.amountSwapDesired).call();
+        const tokenAddress0 = TokenInfoArray[0][this.state.token0].token_contract_address;
+        const tokenAddress1 = TokenInfoArray[0][this.state.token1].token_contract_address;
+
+        const factoryInstance = await getUniswapV2Factory(web3);
+        const pair = await factoryInstance.methods.getPair(tokenAddress0, tokenAddress1).call();
+        // const blockTimeStampLast = await oracleInstance.methods.getBlockLastTimeStamp(pair).call();
+
+        // const timeStampDiff = Math.floor(new Date().getTime()/1000) - blockTimeStampLast;
+        // console.log(timeStampDiff);
+        // if(timeStampDiff > 86400) {
+        //     await oracleInstance.methods.update(
+        //         pair
+        //     ).send({
+        //         from: accounts[0]
+        //     });
+        // }
+
+        const consultPrice = await oracleInstance.methods.consult(pair, tokenAddress1, this.state.amountSwapDesired).call();
         
         const difference = consultPrice - this.state.amountOut;
         const numerator = difference * 100;
         const slippage = numerator/consultPrice; 
+        const slippage2 = slippage + " % Slippage rate"
         this.setState({
-            slippage,
+            slippage: slippage2,
             consultPrice
         }) 
     }
@@ -70,6 +90,41 @@ class Trade extends Component {
         })    
         await this.calculateSLippageRate();
     }
+
+    updateOracle = async () => {
+        event.preventDefault();
+        try {
+            this.setState({updateLoading: true});
+            if(this.state.token0 != "") {
+                const accounts = await web3.eth.getAccounts();
+                const oracleInstance = await getOraclePriceInstance(web3);
+                // it gives tokenAddress value respect to consultAmountIn value
+                const tokenAddress0 = TokenInfoArray[0][this.state.token0].token_contract_address;
+                const tokenAddress1 = TokenInfoArray[0][this.state.token1].token_contract_address;
+    
+                const factoryInstance = await getUniswapV2Factory(web3);
+                const pair = await factoryInstance.methods.getPair(tokenAddress0, tokenAddress1).call();
+                const blockTimeStampLast = await oracleInstance.methods.getBlockLastTimeStamp(pair).call();
+    
+                const timeStampDiff = Math.floor(new Date().getTime()/1000) - blockTimeStampLast;
+                if(timeStampDiff > 86400) {
+                    await oracleInstance.methods.update(
+                        pair
+                    ).send({
+                        from: accounts[0]
+                    });
+                }
+            } else {
+                toast.error("Please select token pair!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            }
+            this.setState({updateLoading: false});
+        } catch (error) {
+            this.setState({updateLoading: false});
+            console.log(error);
+        }
+    };
 
     swapExactTokensForTokens = async () => {
         event.preventDefault();
@@ -96,89 +151,107 @@ class Trade extends Component {
                     }
                 }
 
-                if(this.state.shouldSwap) {
-                    // Trade will happen here
-                    this.setState({shouldSwap: false});
-                    const erc20ContractInstance2 = await getERCContractInstance(web3, this.state.token0);
-        
-                    // check balance
-                    const balance = await erc20ContractInstance2.methods.balanceOf(accounts[0]).call();
-                    if(balance >= this.state.amountSwapDesired) {
-                        
-                    const allowance = await erc20ContractInstance2.methods.allowance(accounts[0], this.state.routeraddress).call();
-                    if(parseInt(allowance) < parseInt(this.state.amountSwapDesired)) {
-                        await erc20ContractInstance2.methods.approve(
-                        this.state.routeraddress, // Uniswap router address
-                        this.state.amountSwapDesired
-                        ).send({
-                            from: accounts[0]
-                        });
-                    }
-        
-                    //check allowance
-                    if(parseInt(allowance) >= parseInt(this.state.amountSwapDesired)) {
-                        const routeContractInstance = await getUniswapV2Router(web3);
-                        const transactionHash = await routeContractInstance.methods.swapExactTokensForTokens(
-                            this.state.amountSwapDesired,
-                            this.state.minValue,
-                            [TokenInfoArray[0][this.state.token0].token_contract_address, TokenInfoArray[0][this.state.token1].token_contract_address],
-                            accounts[0],
-                            Math.floor(new Date().getTime()/1000) + 86400
-                        ).send({
-                            from: accounts[0]
-                        });
-
-                    //add transation in transaction history
-                    const models = {
-                        "transactionHash": transactionHash.transactionHash,
-                        "token0" : this.state.token0,
-                        "token1" : this.state.token1,
-                        "pairAddress" : this.state.pairAddress,
-                        "amountIN": this.state.amountSwapDesired,
-                        "amountOut": amountOut
-                    }
-
-                    Axios.post('http://localhost:4000/api/createProgram', models)
-                        .then(res => {
-                            if(res.statusText == "OK") {
-                                alert("success");
-                            } else {
-                                console.log(res);
-                                alert("Error");
-                            }
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            this.setState({shouldSwap: false, tradeLoading: false});
-                            alert("Catch");
-                        })
-
-                        console.log(transactionHash);
-                        toast.success("Trade Successful!!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        
-                        toast.success("Transaction Hash: " + transactionHash.blockHash , {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                    } else {
-                        // Insufficeient allowance
-                        toast.error(this.state.token0 + " allowance is not given perfectly. Please Try again!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                        }
-                    } else {
-                        // Insufficeient balance
-                        toast.error("Insufficeient " + this.state.token0 + " balance!", {
-                            position: toast.POSITION.TOP_RIGHT
-                        });
-                    }
-                    } else {
-                        // Slippage rate is high so trade will not be happen
-                        toast.error("Swap will not be perform!", {
+                const oracleInstance = await getOraclePriceInstance(web3);
+                // it gives tokenAddress value respect to consultAmountIn value
+                const tokenAddress0 = TokenInfoArray[0][this.state.token0].token_contract_address;
+                const tokenAddress1 = TokenInfoArray[0][this.state.token1].token_contract_address;
+    
+                const factoryInstance = await getUniswapV2Factory(web3);
+                const pair = await factoryInstance.methods.getPair(tokenAddress0, tokenAddress1).call();
+                const blockTimeStampLast = await oracleInstance.methods.getBlockLastTimeStamp(pair).call();
+    
+                const timeStampDiff = Math.floor(new Date().getTime()/1000) - blockTimeStampLast;
+                if(timeStampDiff > 86400) {
+                    toast.error("Please update oracle price using update button below!!", {
                         position: toast.POSITION.TOP_RIGHT
-                        });
-                    } 
+                    });
+                } else {
+                    
+                    if(this.state.shouldSwap) {
+                        // Trade will happen here
+                        this.setState({shouldSwap: false});
+                        const erc20ContractInstance2 = await getERCContractInstance(web3, this.state.token0);
+            
+                        // check balance
+                        const balance = await erc20ContractInstance2.methods.balanceOf(accounts[0]).call();
+                        console.log(balance)
+                        console.log(this.state.amountSwapDesired)
+                        if(balance >= this.state.amountSwapDesired) {
+                            
+                        const allowance = await erc20ContractInstance2.methods.allowance(accounts[0], this.state.routeraddress).call();
+                        if(parseInt(allowance) < parseInt(this.state.amountSwapDesired)) {
+                            await erc20ContractInstance2.methods.approve(
+                            this.state.routeraddress, // Uniswap router address
+                            this.state.amountSwapDesired
+                            ).send({
+                                from: accounts[0]
+                            });
+                        }
+            
+                            //check allowance
+                            if(parseInt(allowance) >= parseInt(this.state.amountSwapDesired)) {
+                                const routeContractInstance = await getUniswapV2Router(web3);
+                                const transactionHash = await routeContractInstance.methods.swapExactTokensForTokens(
+                                    this.state.amountSwapDesired,
+                                    this.state.minValue,
+                                    [TokenInfoArray[0][this.state.token0].token_contract_address, TokenInfoArray[0][this.state.token1].token_contract_address],
+                                    accounts[0],
+                                    Math.floor(new Date().getTime()/1000) + 86400
+                                ).send({
+                                    from: accounts[0]
+                                });
+                                //add transation in transaction history
+                                const models = {
+                                    "transactionHash": transactionHash.transactionHash,
+                                    "token0" : this.state.token0,
+                                    "token1" : this.state.token1,
+                                    "pairAddress" : this.state.pairAddress,
+                                    "amountIN": this.state.amountSwapDesired,
+                                    "amountOut": this.state.amountOut
+                                }
+
+                                Axios.post('http://localhost:4000/api/createProgram', models)
+                                    .then(res => {
+                                        if(res.statusText == "OK") {
+                                            alert("success");
+                                        } else {
+                                            console.log(res);
+                                            alert("Error");
+                                        }
+                                    })
+                                    .catch(err => {
+                                        console.log(err);
+                                        this.setState({shouldSwap: false, tradeLoading: false});
+                                        alert("Catch");
+                                    })
+
+                                    console.log(transactionHash);
+                                    toast.success("Trade Successful and transaction added to transaction history!!", {
+                                        position: toast.POSITION.TOP_RIGHT
+                                    });
+                                
+                                    toast.success("Transaction Hash: " + transactionHash.blockHash , {
+                                        position: toast.POSITION.TOP_RIGHT
+                                    });
+                            } else {
+                                // Insufficeient allowance
+                                    toast.error(this.state.token0 + " allowance is not given perfectly. Please Try again!", {
+                                        position: toast.POSITION.TOP_RIGHT
+                                    });
+                                }
+                            } else {
+                                // Insufficeient balance
+                                toast.error("Insufficeient " + this.state.token0 + " balance!", {
+                                    position: toast.POSITION.TOP_RIGHT
+                                });
+                            }
+                        } else {
+                            // Slippage rate is high so trade will not be happen
+                            toast.error("Swap will not be perform, Slippage rate is high!", {
+                            position: toast.POSITION.TOP_RIGHT
+                            });
+                        } 
+                    }
                 } else {
                     toast.error("Please add valid value!!", {
                         position: toast.POSITION.TOP_RIGHT
@@ -316,6 +389,20 @@ class Trade extends Component {
                                                 style={{width:"280px", height:"40px"}}> 
                                                 <Icon name="american sign language interpreting"></Icon>
                                                 Trade
+                                            </Button>
+                                        </Form.Field>
+                                    </Form>
+                                    <Form onSubmit={this.updateOracle} style={{marginTop: "10px"}}>
+                                        <Form.Field>
+                                            <Button 
+                                                color="black"
+                                                basic
+                                                bsStyle="primary" 
+                                                type="submit"
+                                                loading={this.state.updateLoading}
+                                                style={{width:"280px", height:"40px"}}> 
+                                                <Icon name="edit"></Icon>
+                                                Update Oracle Price
                                             </Button>
                                         </Form.Field>
                                     </Form>

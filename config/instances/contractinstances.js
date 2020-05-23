@@ -50,8 +50,11 @@ export function getUniswapV2Library(web3) {
 }
 
 export function getOraclePriceInstance(web3) {
-    const abi = '[{"inputs":[{"internalType":"address","name":"factory","type":"address"},{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"PERIOD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"blockTimestampLast","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"consult","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"iUniswapV2Pair","outputs":[{"internalType":"contract IUniswapV2Pair","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price0Average","outputs":[{"internalType":"uint224","name":"_x","type":"uint224"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price0CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price1Average","outputs":[{"internalType":"uint224","name":"_x","type":"uint224"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price1CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token0","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_PERIOD","type":"uint256"}],"name":"update","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
-    const address = "0xD2266F6E7031AeB789220Eb0B3e2eC75888d8E3C";
+    // const abi = '[{"inputs":[{"internalType":"address","name":"factory","type":"address"},{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"PERIOD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"blockTimestampLast","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"consult","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"iUniswapV2Pair","outputs":[{"internalType":"contract IUniswapV2Pair","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price0Average","outputs":[{"internalType":"uint224","name":"_x","type":"uint224"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price0CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price1Average","outputs":[{"internalType":"uint224","name":"_x","type":"uint224"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price1CumulativeLast","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token0","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token1","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_PERIOD","type":"uint256"}],"name":"update","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
+    // const address = "0xD2266F6E7031AeB789220Eb0B3e2eC75888d8E3C";
+    
+    const abi = '[{"inputs":[{"internalType":"address","name":"factory","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"PERIOD","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"blockTimestampLast","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_pair","type":"address"},{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amountIn","type":"uint256"}],"name":"consult","outputs":[{"internalType":"uint256","name":"amountOut","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_pair","type":"address"}],"name":"getBlockLastTimeStamp","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"iUniswapV2Pair","outputs":[{"internalType":"contract IUniswapV2Pair","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"tokenA","type":"address"},{"internalType":"address","name":"tokenB","type":"address"}],"name":"setPairInfo","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_pair","type":"address"}],"name":"update","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
+    const address = '0x0999eA6AfBA7CcA9347B60Dca3b9D907135e58E7';
     const jsonAbi = JSON.parse(abi);
     const contract = new web3.eth.Contract(jsonAbi, address);    
     return contract;
@@ -120,6 +123,10 @@ export const TokenInfoArray = [
             "token_symbol":"pair",
             "token_contract_address":"0x5f3d2e5F7748d261e1e039879c2B47A433fDDf35",
             "decimals": 18
+        },'WETH-BAT': {
+            "token_symbol":"pair",
+            "token_contract_address":"0x7cce7479c7F12997A3c559A34a48365891409AdF",
+            "decimals": 18
         }
     }
 ];
@@ -158,6 +165,10 @@ export const TokenInfoArray = [
             "pairaddress":"0x5f3d2e5F7748d261e1e039879c2B47A433fDDf35",
             "token0":"ZIL",
             "token1": "KNC"
+        },'WETH-BAT': {
+            "pairaddress":"0x7cce7479c7F12997A3c559A34a48365891409AdF",
+            "token0":"WETH",
+            "token1": "BAT"
         }
     }
   ];
@@ -210,6 +221,11 @@ export const TokenInfoArray = [
         text: 'ZIL-KNC',
         value: 'ZIL-KNC',
         label: { color: 'black', empty: true, circular: true },
-    }
+    },{
+        key: 'WETH-BAT',
+        text: 'WETH-BAT',
+        value: 'WETH-BAT',
+        label: { color: 'purple', empty: true, circular: true },
+      }
   ];
   

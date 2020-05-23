@@ -313,7 +313,7 @@ class Liquidity extends Component {
                     </Form.Field>
                 </Form>
                 </Segment>
-                <Divider></Divider>
+                {/* <Divider></Divider>
                 <Segment color="yellow">
                 <Form onSubmit={this.createPair} >
                     <Message color="yellow">
@@ -356,7 +356,7 @@ class Liquidity extends Component {
                         </Button>
                     </Form.Field>
                 </Form>
-                </Segment>
+                </Segment> */}
             </Grid.Column>
 
         );
