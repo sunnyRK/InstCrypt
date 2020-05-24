@@ -141,19 +141,24 @@ export const TokenInfoArray = [
             "pairaddress":"0x2084b246D7455E973F646Eac00D655541F50aD61",
             "token0":"DAI",
             "token1": "KNC"
-        },'DAI-cUSDT': {
-            "pairaddress":"0xC1c88DA16Cae5e0A61E665fD63129dC2b64C2E2E",
-            "token0":"DAI",
-            "token1": "cUSDT"
-        },'DAI-ZIL': {
+        },
+        // 'DAI-cUSDT': {
+        //     "pairaddress":"0xC1c88DA16Cae5e0A61E665fD63129dC2b64C2E2E",
+        //     "token0":"DAI",
+        //     "token1": "cUSDT"
+        // }
+        'DAI-ZIL': {
             "pairaddress":"0x80ba6fad89faB001CF7e369179a5F418A8d5aA7f",
             "token0":"DAI",
             "token1": "ZIL"
-        },'WETH-cUSDT': {
-            "pairaddress":"0x4763487b0d43747F9715eCeE5e85861d61DC338c",
-            "token0":"WETH",
-            "token1": "cUSDT"
-        },'WETH-KNC': {
+        },
+        // 'WETH-cUSDT': {
+        //     "pairaddress":"0x4763487b0d43747F9715eCeE5e85861d61DC338c",
+        //     "token0":"WETH",
+        //     "token1": "cUSDT"
+        // }
+        
+        'WETH-KNC': {
             "pairaddress":"0x38c21BDae168084f5084e6182aDBF490Cda0AC9B",
             "token0":"WETH",
             "token1": "KNC"
@@ -186,24 +191,24 @@ export const TokenInfoArray = [
       value: 'DAI-KNC',
       label: { color: 'blue', empty: true, circular: true },
     },
-    {
-      key: 'DAI-cUSDT',
-      text: 'DAI-cUSDT',
-      value: 'DAI-cUSDT',
-      label: { color: 'yellow', empty: true, circular: true },
-    },
+    // {
+    //   key: 'DAI-cUSDT',
+    //   text: 'DAI-cUSDT',
+    //   value: 'DAI-cUSDT',
+    //   label: { color: 'yellow', empty: true, circular: true },
+    // },
     {
       key: 'DAI-ZIL',
       text: 'DAI-ZIL',
       value: 'DAI-ZIL',
       label: { color: 'pink', empty: true, circular: true },
     },
-    {
-      key: 'WETH-cUSDT',
-      text: 'WETH-cUSDT',
-      value: 'WETH-cUSDT',
-      label: { color: 'green', empty: true, circular: true },
-    },
+    // {
+    //   key: 'WETH-cUSDT',
+    //   text: 'WETH-cUSDT',
+    //   value: 'WETH-cUSDT',
+    //   label: { color: 'green', empty: true, circular: true },
+    // },
     {
         key: 'WETH-KNC',
         text: 'WETH-KNC',
