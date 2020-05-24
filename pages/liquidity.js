@@ -217,7 +217,6 @@ class Liquidity extends Component {
                     <Form.Field>
                         <Message color="green">
                             <Message.Header>Add Liquidity</Message.Header>
-                            Add Liquidity in any pair 
                         </Message>
                     </Form.Field>
                     <Form.Field>
@@ -271,7 +270,6 @@ class Liquidity extends Component {
                 <Form onSubmit={this.selectMax}>
                     <Message color="red">
                         <Message.Header>Remove Liquidity</Message.Header>
-                        Remove Liquidity in any pair 
                     </Message>
                     <Form.Field>
                     <Input
