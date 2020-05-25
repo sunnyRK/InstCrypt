@@ -29,14 +29,14 @@ I used Next.js and Semantic UI react to design the frontend. And for saving the 
 
 ## Tech stack
 
-Ethereum 
-Solidity 
-Web3.js 
-Uniswap-V2
-Uniswap-V2-Oracles
-nodejs api
-MongoDB
-Next.Js
+Ethereum   
+Solidity   
+Web3.js   
+Uniswap-V2  
+Uniswap-V2-Oracles  
+nodejs api  
+MongoDB  
+Next.Js  
 Semantic UI React
 
 
