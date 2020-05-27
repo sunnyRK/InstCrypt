@@ -27,6 +27,11 @@ I used Next.js and Semantic UI react to design the frontend. And for saving the 
 3. `node server.js`
 4. Currently deployed on Ropsten Network
 
+## Future Task
+
+1. Get Liquidity from other protocols(AAVE, Compound)
+2. Chainlink integration
+
 ## Tech stack
 
 Ethereum   
