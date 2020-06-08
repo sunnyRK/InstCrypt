@@ -7,6 +7,11 @@ import Transaction from "./transaction";
 
 class InstCryp extends Component {
 
+  
+  async componentDidMount(){  
+    window.ethereum.enable()
+    window.web3 = web3
+}  
 
   render() {
     const panes = [

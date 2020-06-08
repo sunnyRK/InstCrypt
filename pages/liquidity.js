@@ -119,7 +119,7 @@ class Liquidity extends Component {
         }
       };
     
-      addLiquidity = async () => {
+    addLiquidity = async () => {
         event.preventDefault();
         try {
             this.setState({addLiquidityLoading: true});

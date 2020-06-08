@@ -51,18 +51,32 @@ class Trade extends Component {
         // const timeStampDiff = Math.floor(new Date().getTime()/1000) - blockTimeStampLast;
         // console.log(timeStampDiff);
         // if(timeStampDiff > 86400) {
-        //     await oracleInstance.methods.update(
-        //         pair
-        //     ).send({
-        //         from: accounts[0]
-        //     });
+            // await oracleInstance.methods.update(
+            //     "86400"
+            // ).send({
+            //     from: accounts[0]
+            // });
         // }
 
+        // const amountIn = await libInstance.methods.getAmountOut(this.state.amountSwapDesired,reserves[1], reserves[0]).call(); 
+        // console.log("amountIn ", amountIn);
+
         const consultPrice = await oracleInstance.methods.consult(pair, tokenAddress1, this.state.amountSwapDesired).call();
+        // const consultPrice = await oracleInstance.methods.consult(tokenAddress1, this.state.amountSwapDesired).call();
+        
+        console.log("consultprice", consultPrice);
+        console.log("amountout ", this.state.amountOut);
         
         const difference = consultPrice - this.state.amountOut;
+        console.log("difference ", difference);
+
         const numerator = difference * 100;
+        console.log("numerator ", numerator);
+
         const slippage = numerator/consultPrice; 
+        console.log("slippage ", slippage);
+
+        // alert(slippage);
         const slippage2 = slippage + " %";
         this.setState({
             slippage: slippage2,
@@ -181,7 +195,7 @@ class Trade extends Component {
                         console.log(this.state.amountSwapDesired)
                         if(balance >= this.state.amountSwapDesired) {
                             
-                        const allowance = await erc20ContractInstance2.methods.allowance(accounts[0], this.state.routeraddress).call();
+                        let allowance = await erc20ContractInstance2.methods.allowance(accounts[0], this.state.routeraddress).call();
                         if(parseInt(allowance) < parseInt(this.state.amountSwapDesired)) {
                             await erc20ContractInstance2.methods.approve(
                             this.state.routeraddress, // Uniswap router address
@@ -189,6 +203,7 @@ class Trade extends Component {
                             ).send({
                                 from: accounts[0]
                             });
+                            allowance = await erc20ContractInstance2.methods.allowance(accounts[0], this.state.routeraddress).call();
                         }
                             //check allowance
                             if(parseInt(allowance) >= parseInt(this.state.amountSwapDesired)) {
