@@ -211,11 +211,11 @@ class Liquidity extends Component {
                 <Label as="a" tag color="green">
                     For Liquidity Providers
                 </Label>
-                <Segment color="green" textAlign="center">
+                <Segment color="black" textAlign="center">
                 
                 <Form onSubmit={this.addLiquidity}>
                     <Form.Field>
-                        <Message color="green">
+                        <Message color="grey">
                             <Message.Header>Add Liquidity</Message.Header>
                         </Message>
                     </Form.Field>
@@ -254,7 +254,7 @@ class Liquidity extends Component {
                     </Form.Field>
                     <Form.Field>
                         <Button 
-                            color="green"
+                            color="black"
                             bsStyle="primary" 
                             type="submit"
                             loading={this.state.addLiquidityLoading}
@@ -266,9 +266,9 @@ class Liquidity extends Component {
                 </Form>
                 </Segment>
                 <Divider></Divider>
-                <Segment color="red" textAlign="center">
+                <Segment color="black" textAlign="center">
                 <Form onSubmit={this.selectMax}>
-                    <Message color="red">
+                    <Message color="grey">
                         <Message.Header>Remove Liquidity</Message.Header>
                     </Message>
                     <Form.Field>
@@ -292,7 +292,7 @@ class Liquidity extends Component {
                     </Form.Field>
                     <Form.Field>
                         <Button 
-                            color="pink"
+                            color="black"
                             bsStyle="primary" 
                             basic
                             type="submit"
@@ -304,7 +304,7 @@ class Liquidity extends Component {
                 <Form onSubmit={this.removeLiquidity} style={{marginTop: "20px"}}>
                     <Form.Field>
                         <Button 
-                            color="red"
+                            color="black"
                             bsStyle="primary" 
                             type="submit"
                             loading={this.state.removeLiquidityLoading}

@@ -132,7 +132,7 @@ class CheckLiquidity extends Component {
                             </Message.Header>
                             <Form onSubmit={this.checkPoolTokenPair} style={{margin:"10px"}}>
                                 <Button.Group color='black'>
-                                    <Button loading={this.state.checkbalanceLoading} style={{ marginLeft: '0em', color: "#E03997" }} color="black">
+                                    <Button loading={this.state.checkbalanceLoading} style={{ marginLeft: '0em', color: "#fff" }} color="black">
                                         Choose pair
                                     </Button>
                                     <Dropdown
@@ -152,26 +152,26 @@ class CheckLiquidity extends Component {
                 <Divider></Divider>
                 <Grid.Row columns={3} divided verticalalign='middle' textAlign="center">
                         <Grid.Column>
-                            <Segment color="pink" style={{backgroundColor:"black"}}>
-                                <Statistic color="pink" size='mini'>
-                                    <Statistic.Label style={{color:"#E03997"}}><u>{this.state.checkPairAddress}</u> Pool token</Statistic.Label>
-                                    <Statistic.Value>{this.state.checkPairBalance} Uni-V2 wei</Statistic.Value>
+                            <Segment style={{backgroundColor:"black"}}>
+                                <Statistic color="white" size='mini'>
+                                    <Statistic.Label style={{color:"#fff"}}><u>{this.state.checkPairAddress}</u> Pool token</Statistic.Label>
+                                    <Statistic.Value style={{color:"#fff"}}>{this.state.checkPairBalance} Uni-V2 wei</Statistic.Value>
                                 </Statistic>
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
-                            <Segment color="white" style={{backgroundColor:"#E03997"}}>
+                            <Segment style={{backgroundColor:"#fff"}}>
                                 <Statistic size='mini'>
-                                    <Statistic.Label style={{color:"#fff"}}><u>{this.state.symbol0}</u> liquidity</Statistic.Label>
-                                    <Statistic.Value style={{color:"#fff"}}>{this.state.reserve0} wei</Statistic.Value>
+                                    <Statistic.Label style={{color:"#000"}}><u>{this.state.symbol0}</u> liquidity</Statistic.Label>
+                                    <Statistic.Value style={{color:"#000"}}>{this.state.reserve0} wei</Statistic.Value>
                                 </Statistic>
                             </Segment>
                         </Grid.Column>
                         <Grid.Column>
-                        <Segment color="white" style={{backgroundColor:"#E03997"}}>
+                        <Segment color="white" style={{backgroundColor:"#fff"}}>
                             <Statistic color="pink" size='mini'>
-                                <Statistic.Label style={{color:"#fff"}}><u>{this.state.symbol1}</u> liquidity</Statistic.Label>
-                                <Statistic.Value style={{color:"#fff"}}>{this.state.reserve1} wei</Statistic.Value>
+                                <Statistic.Label style={{color:"#000"}}><u>{this.state.symbol1}</u> liquidity</Statistic.Label>
+                                <Statistic.Value style={{color:"#000"}}>{this.state.reserve1} wei</Statistic.Value>
                             </Statistic>
                         </Segment>
                         </Grid.Column>

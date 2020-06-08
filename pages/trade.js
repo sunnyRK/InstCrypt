@@ -347,8 +347,8 @@ class Trade extends Component {
                                 <Label as="a" tag color="blue">
                                 For Traders
                                 </Label>
-                                <Segment color="blue" textAlign='center'>    
-                                    <Message color="blue">
+                                <Segment color="black" textAlign='center'>    
+                                    <Message color="grey">
                                         <Message.Header>Automate Trade</Message.Header>
                                     </Message>
                                     <Form onSubmit={this.swapExactTokensForTokens}>
@@ -404,7 +404,7 @@ class Trade extends Component {
                                         </Form.Field>
                                         <Form.Field>
                                             <Button 
-                                                color="blue"
+                                                color="black"
                                                 bsStyle="primary" 
                                                 type="submit"
                                                 loading={this.state.tradeLoading}
@@ -417,7 +417,7 @@ class Trade extends Component {
                                     <Form onSubmit={this.updateOracle} style={{marginTop: "10px"}}>
                                         <Form.Field>
                                             <Button 
-                                                color="pink"
+                                                color="black"
                                                 basic
                                                 bsStyle="primary" 
                                                 type="submit"

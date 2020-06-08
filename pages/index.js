@@ -55,7 +55,7 @@ class InstCryp extends Component {
               </Grid>
             </Segment> */}
             <Tab menu={{secondary: true }} panes={panes}/>
-            <Message color="black">
+            <Message color="grey">
                 <Message.Header>Instructions</Message.Header>
                 <List as="ol">
                     <List.Item as="li" value='*'>
