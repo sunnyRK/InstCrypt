@@ -49,8 +49,9 @@ class DesktopContainer extends Component {
             onBottomPassedReverse={this.hideFixedMenu}
           >
             <Segment
+              inverted
               textAlign='center'
-              style={{ minHeight: 65, padding: '0em 0em', marginBottom: "30px", backgroundColor:"#E03997" }}
+              style={{ minHeight: 65, padding: '0em 0em', marginBottom: "30px" }}
               vertical
             >
               <Menu
@@ -65,7 +66,7 @@ class DesktopContainer extends Component {
                   <Menu.Item>
                     
                   <Form onSubmit={this.HomePage}>
-                      <Button style={{ marginLeft: '0em', color: "#E03997" }} color="black">
+                      <Button style={{ marginLeft: '0em', color:"black" }} >
                         InstCrypt
                       </Button>
                       </Form>
@@ -111,15 +112,16 @@ class DesktopContainer extends Component {
               getWidth={getWidth}
               maxWidth={Responsive.onlyMobile.maxWidth}>
             <Segment
+              inverted
               textAlign='center'
-              style={{ minHeight: 65, padding: '1em 0em', marginBottom: "30px" , backgroundColor:"#E03997"}}
+              style={{ minHeight: 65, padding: '1em 0em', marginBottom: "30px"}}
               vertical
               >
               <Container>
                 <Menu pointing secondary size='large'>
                   <Menu.Item>
                     <Form onSubmit={this.HomePage}>
-                    <Button style={{ marginLeft: '0em', color: "#E03997" }} color="black">
+                    <Button style={{ marginLeft: '0em', color:"black" }}>
                         InstCrypt
                       </Button>
                       </Form>

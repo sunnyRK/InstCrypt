@@ -33,7 +33,7 @@ class InstCryp extends Component {
       <Layout>
         <ToastContainer/>
           <Container>
-            <Segment style={{backgroundColor:"#f8f8f8"}} textAlign="center" >
+            {/* <Segment style={{backgroundColor:"#f8f8f8"}} textAlign="center" >
               <Grid>
                 <Grid.Row columns={3}>
                   <Grid.Column>
@@ -47,15 +47,15 @@ class InstCryp extends Component {
                     </Label>
                   </Grid.Column>
                   <Grid.Column>
-                    <Label as="a" tag color="pink">
+                    <Label as="a" tag color="red">
                       Liquidity Reserves
                     </Label>
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
-            </Segment>
+            </Segment> */}
             <Tab menu={{secondary: true }} panes={panes}/>
-            <Message color="pink">
+            <Message color="black">
                 <Message.Header>Instructions</Message.Header>
                 <List as="ol">
                     <List.Item as="li" value='*'>

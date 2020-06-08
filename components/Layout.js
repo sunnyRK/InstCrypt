@@ -18,7 +18,7 @@ export default props => {
             </Head>
             <Headers/>
             {props.children}
-            <Segment inverted vertical style={{ padding: '4em 4em', marginTop: "30px", backgroundColor:"#E03997" }}>
+            <Segment inverted vertical style={{ padding: '4em 4em', marginTop: "30px" }}>
                     <Container> 
                     <Grid divided inverted stackable>
                         <Grid.Row >
