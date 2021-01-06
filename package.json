@@ -5,7 +5,7 @@
     "main": "index.js",
     "dependencies": {
         "@uniswap/sdk": "^2.0.3",
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "bignumber.js": "^9.0.0",
         "bootstrap": "^4.5.0",
         "css-loader": "^3.5.3",
